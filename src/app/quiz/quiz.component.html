@@ -1,0 +1,20 @@
+<app-header></app-header>
+<section class="d-flex flex-row flex-wrap">
+    <div *ngFor="let character of characters; let i = index" class="col-md-3 my-3">
+        <app-character-card 
+                [character]="character">
+        </app-character-card>
+    </div>
+</section>
+<div class="row">
+    <div class="col-xs-12 col-12">
+        <pager
+            [totalItems]="totalItems"
+            [(ngModel)]="currentPage"
+            (pageChanged)="pageChanged($event)"
+            pageBtnClass="btn"
+            [itemsPerPage]="10"
+            class="pull-left">
+        </pager>
+    </div>
+</div>

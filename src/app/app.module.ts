@@ -1,16 +1,47 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
+
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
+import { QuizComponent } from './quiz/quiz.component';
+import { CharacterCardComponent } from './quiz/components/character-card/character-card.component';
+import { CharacterDetailsComponent } from './quiz/components/character-details/character-details.component';
+import { GameOverComponent } from './quiz/components/game-over/game-over.component';
+import { RankingComponent } from './ranking/ranking.component';
+import { AppRoutingModule } from './app-routing.module';
+import { HeaderComponent } from './quiz/components/header/header.component';
+import { SwapiService } from './services/swapi.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    QuizComponent,
+    CharacterCardComponent,
+    CharacterDetailsComponent,
+    GameOverComponent,
+    RankingComponent,
+    HeaderComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    AppRoutingModule,
+    PaginationModule.forRoot(),
+    ModalModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    SwapiService
+  ],
+  entryComponents: [
+    CharacterDetailsComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

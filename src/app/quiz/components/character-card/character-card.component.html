@@ -1,0 +1,16 @@
+<div class="card">
+    <h5>{{character.name}}</h5>
+    <div class="card-body">
+        <div class="form-group">
+            <input type="text" 
+                   class="form-control" 
+                   placeholder="Name here..."
+                   [ngModel]="nameGuess"
+                   [disabled]="isDisabled"
+                   (ngModelChange)="nameChanged($event)">
+        </div>
+        <button class="btn btn-info"
+        [disabled]="isDisabled"
+        (click)="moreInfo()">Details (-5 points)</button>
+    </div>
+</div>

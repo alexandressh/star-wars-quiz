@@ -1,0 +1,39 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Details</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div class="modal-body">
+    <ul>
+        <li>
+            <span>Specie: </span>
+            <span>{{character.species}}</span>
+        </li>
+        <li>
+            <span>Height: </span>
+            <span>{{character.height}}</span>
+        </li>
+        <li>
+            <span>Hair: </span>
+            <span>{{character.hair_color}}</span>
+        </li>
+        <li>
+            <span>Planet: </span>
+            <span>{{character.homeworld}}</span>
+        </li>
+        <li>
+            <span>Movies: </span>
+            <span>{{character.movies}}</span>
+        </li>
+        <li>
+            <span>Vehicles: </span>
+            <span>{{character.hehicles}}</span>
+        </li>
+    </ul>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+</div>
