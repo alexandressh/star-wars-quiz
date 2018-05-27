@@ -11,4 +11,6 @@ export interface Character {
     films: string[];
     gender: string;
     height: string;
+    points: number;
+    index: number;
 }

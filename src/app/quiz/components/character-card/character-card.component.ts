@@ -18,19 +18,28 @@ export class CharacterCardComponent implements OnInit {
   nameGuess: string;
   isDisabled = false;
   bsModalRef: BsModalRef;
+  imgLocation: string;
 
   constructor(
     private modalService: BsModalService,
     private quizService: QuizService
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    const imgIndex = this.character.index - 9;
+    this.imgLocation = `/assets/imgs/${imgIndex}.jpg`;
+
+    if(this.character.points === 0) {
+      this.nameGuess = this.character.name;
+      this.isDisabled = true;
+    }
+  }
 
 
   nameChanged(event) {
     this.nameGuess = event;
     if(this.nameGuess === this.character.name) {
-      this.quizService.correctGuess(this.character.name);
+      this.quizService.correctGuess(this.character.index);
       this.isDisabled = true;
     }
   }
@@ -40,7 +49,7 @@ export class CharacterCardComponent implements OnInit {
     this.bsModalRef = this.modalService.show(CharacterDetailsComponent, { initialState });
     this.bsModalRef.content.closeBtnName = 'Close';
 
-    this.quizService.detailsConsulted(this.character.name);
+    this.quizService.detailsConsulted(this.character.index);
   }
 
 }

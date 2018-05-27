@@ -9,12 +9,12 @@
 <div class="row">
     <div class="col-xs-12 col-12">
         <pager
+            pageBtnClass="btn"
+            class="pull-left"
             [totalItems]="totalItems"
             [(ngModel)]="currentPage"
             (pageChanged)="pageChanged($event)"
-            pageBtnClass="btn"
-            [itemsPerPage]="10"
-            class="pull-left">
+            [itemsPerPage]="10">
         </pager>
     </div>
 </div>
