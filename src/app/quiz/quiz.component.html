@@ -1,20 +1,23 @@
 <app-header></app-header>
-<section class="d-flex flex-row flex-wrap">
-    <div *ngFor="let character of characters; let i = index" class="col-md-3 my-3">
+<section class="quiz-card-columns card-columns">
+    <!-- <div *ngFor="let character of characters; let i = index" class="col-md-3 my-3"> -->
         <app-character-card 
+                *ngFor="let character of characters; let i = index"
                 [character]="character">
         </app-character-card>
-    </div>
+    <!-- </div> -->
 </section>
 <div class="row">
-    <div class="col-xs-12 col-12">
-        <pager
-            pageBtnClass="btn"
-            class="pull-left"
-            [totalItems]="totalItems"
-            [(ngModel)]="currentPage"
-            (pageChanged)="pageChanged($event)"
-            [itemsPerPage]="10">
-        </pager>
+    <div class="col-xs-12 col-12 d-flex justify-content-center">
+        <div>
+            <pager
+                pageBtnClass="btn"
+                class="pull-left"
+                [totalItems]="totalItems"
+                [(ngModel)]="currentPage"
+                (pageChanged)="pageChanged($event)"
+                [itemsPerPage]="10">
+            </pager>
+        </div>
     </div>
 </div>

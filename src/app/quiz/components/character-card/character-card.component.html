@@ -1,17 +1,22 @@
 <div class="card">
     <img class="card-img-top" [src]="imgLocation" alt="Card image cap">
-    <h5>{{character.index}}</h5>
-    <div class="card-body">
-        <div class="form-group">
+    <div class="character-card-overlay card-img-overlay">
+        <div class="input-group">
             <input type="text" 
                    class="form-control" 
                    placeholder="Name here..."
                    [ngModel]="nameGuess"
                    [disabled]="isDisabled"
                    (ngModelChange)="nameChanged($event)">
+            <div class="input-group-append">
+                <button class="btn btn-info"
+                    [class.btn-info]="!isDisabled"
+                    [class.btn-success]="isDisabled"
+                    [disabled]="isDisabled"
+                    (click)="moreInfo()">
+                    ?
+                </button>
+            </div>
         </div>
-        <button class="btn btn-info"
-        [disabled]="isDisabled"
-        (click)="moreInfo()">Details (-5 points)</button>
     </div>
 </div>

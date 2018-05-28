@@ -65,8 +65,8 @@ export class QuizService {
   private emitTime() {
     this.time++;
 
-    if(this.time >= 120) {
-      this.timerId.clear();
+    if(this.time >= 119) {
+      clearInterval(this.timerId);
       this.timingSubject.next(`00:00`);
       return;
     }
