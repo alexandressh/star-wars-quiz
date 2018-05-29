@@ -37,7 +37,13 @@ export class CharacterCardComponent implements OnInit {
 
   nameChanged(event) {
     this.nameGuess = event;
-    if(this.nameGuess === this.character.name) {
+    let guess =  this.nameGuess.toLowerCase();
+    guess = guess.replace(/[^A-Z0-9]/ig, '');
+
+    let name = this.character.name.toLowerCase();
+    name = name.replace(/[^A-Z0-9]/ig, '');
+
+    if(guess === name) {
       this.quizService.correctGuess(this.character.index);
       this.isDisabled = true;
     }
