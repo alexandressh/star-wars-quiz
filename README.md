@@ -1,4 +1,4 @@
-# AgileContent
+# StarWarsQuiz
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.0.3.
 
@@ -19,4 +19,4 @@ In order to start this project, run the following commands:
 - App will be available under port 4200 - `http://localhost:4200/`
 
 
-App is also available online on `XXX` (hosted over [ZEIT](https://zeit.co/dashboard))
+App is also available online on `https://star-wars-quiz-akkztskwwz.now.sh` (hosted over [ZEIT](https://zeit.co/dashboard))
