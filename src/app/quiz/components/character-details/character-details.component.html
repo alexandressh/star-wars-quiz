@@ -7,7 +7,7 @@
 
 <div class="modal-body d-flex">
     <img [src]="imgLocation" class="character-img img-thumbnail" alt="Character picture">
-    <ul>
+    <ul class="list-unstyled pl-3">
         <li>
             <b>Specie: </b>
             <span *ngIf="species$ | async as species; else loadingSpecies">

@@ -1,21 +1,26 @@
-<div class="card">
-    <img class="card-img-top" [src]="imgLocation" alt="Card image cap">
-    <div class="character-card-overlay card-img-overlay">
-        <div class="input-group">
-            <input type="text" 
-                   class="form-control" 
-                   placeholder="Name here..."
-                   [ngModel]="nameGuess"
-                   [disabled]="isDisabled"
-                   (ngModelChange)="nameChanged($event)">
-            <div class="input-group-append">
-                <button class="btn btn-info"
-                    [class.btn-info]="!isDisabled"
-                    [class.btn-success]="isDisabled"
-                    [disabled]="isDisabled"
-                    (click)="moreInfo()">
-                    ?
-                </button>
+<div class="col mb-3">
+    <div class="card-sizing card">
+        <img class="card-img-top" [src]="imgLocation" alt="Card image cap">
+        <div class="character-card-overlay card-img-overlay">
+            <div class="input-group">
+                <input type="text" 
+                        class="form-control" 
+                        placeholder="Name here..."
+                        [ngModel]="nameGuess"
+                        [disabled]="isDisabled"
+                        (ngModelChange)="nameChanged($event)">
+                <div class="input-group-append">
+                    <button class="btn btn-info"
+                        [class.btn-info]="!isDisabled"
+                        [class.btn-success]="isDisabled"
+                        [disabled]="isDisabled"
+                        (click)="moreInfo()">
+                        <i class="fa fa-question"
+                           [class.fa-check]="isDisabled"
+                           [class.fa-question]="!isDisabled"></i>
+                        
+                    </button>
+                </div>
             </div>
         </div>
     </div>

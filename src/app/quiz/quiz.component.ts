@@ -38,7 +38,7 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    
+    this.gameOverSubscription.unsubscribe();
   }
 
   pageChanged(event) {
@@ -58,7 +58,12 @@ export class QuizComponent implements OnInit, OnDestroy {
   }
 
   private gameOverEvent(points: number) {
-    const initialState = { points: points }
-    this.bsModalRef = this.modalService.show(GameOverComponent, { initialState });
+    const config = { 
+      initialState: { 
+        points: points 
+      },
+      ignoreBackdropClick: true
+    }
+    this.bsModalRef = this.modalService.show(GameOverComponent, config);
   }
 }

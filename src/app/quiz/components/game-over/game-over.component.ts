@@ -23,7 +23,7 @@ export class GameOverComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-    this.isDarkSide = this.points && this.points < 50;
+    this.isDarkSide = !this.points || this.points < 50;
    }
 
   saveInfo() {

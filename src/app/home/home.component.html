@@ -1,7 +1,28 @@
-<section class="row justify-content-md-center">
-  <div class="col-md-auto">
-    <img src="./assets/imgs/darth-vader.png" alt="">
-    <h1>StarQuiz!</h1>
-    <a class="btn btn-primary margin-auto" [routerLink]="['/quiz']" >Jogar</a>
+<section class="row justify-content-center h-100">
+  <div class="col-auto d-flex flex-column">
+    <h1 class="text-center pt-3">StarQuiz!</h1>
+    <img src="./assets/imgs/thumbnail.jpg" class="img-size img-thumbnail rounded-circle" alt="Yoda picture">
+    <div class="d-flex justify-content-between mt-5">
+      <a class="btn btn-light margin-auto" [routerLink]="['/ranking']">Ranking
+        <i class="fa fa-globe"></i>
+      </a>
+      <a class="btn btn-light margin-auto" [routerLink]="['/quiz']">Play
+        <i class="fa fa-play-circle"></i>
+      </a>
+    </div>
+  </div>
+  <div class="fixed-bottom text-center pb-2">
+    <p class="mb-0">Made with
+      <span class="text-danger">&hearts;</span> by Henrique
+      <a target="__blank" href="https://br.linkedin.com/in/alexandressh"><i class="fa fa-linkedin pl-2"></i></a>
+      <a target="__blank" href="https://github.com/alexandressh"><i class="fa fa-github pl-2"></i></a>
+      @2018
+    </p>
+    <small>
+      * Images organized by 
+        <a target="__blank" href="https://starwars-visualguide.com/#/">Star Wars Visual Guide</a>
+      and collected from
+      <a target="__blank" href="http://starwars.wikia.com/wiki/Main_Page">Wookiepedia</a>
+    </small>
   </div>
 </section>

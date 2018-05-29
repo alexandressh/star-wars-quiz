@@ -1,7 +1,13 @@
-<header class="row justify-content-between">
-  <div class="d-flex">
-    <img src="./assets/imgs/darth-vader.png" alt="" width="200" height="150">
+<header class="row align-items-center">
+  <div class="col-1">
+    <a [routerLink]="['/home']">
+      <img src="./assets/imgs/thumbnail.jpg" alt="Yoda Image" class="my-3 mh-100 img-thumbnail rounded-circle">
+    </a>
+  </div>
+  <div class="col-9 my-auto text-center">
     <h1>StarQuiz!</h1>
   </div>
-  <div>{{time}}</div>
+  <div class="col-2 my-auto text-center">
+    <div>Time Left: {{time}}</div>
+  </div>
 </header>

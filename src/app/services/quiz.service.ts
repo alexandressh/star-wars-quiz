@@ -16,10 +16,12 @@ export class QuizService {
   private mappedPeoplePages = {};
   private mappedGeneralPages = {};
 
-  constructor() { }
+  constructor() {
+   }
 
   startGame(): Observable<number> {
     this.points = 0;
+    this.time = 0;
     this.mappedPeoplePages = {};
     this.timerId = setInterval(this.emitTime.bind(this), 1000);
     return this.gameOverSubject;
@@ -63,7 +65,6 @@ export class QuizService {
 
   detailsConsulted(charIndex: number) {
     const character = this.getCharacterFromPages(charIndex);
-
     character['points'] = 5;
   }
 
@@ -72,7 +73,26 @@ export class QuizService {
   }
 
   saveUserInfo(name: string, email: string, points: number) {
-    console.log(name, email, points);
+    if(!name || !points) {
+      return;
+    }
+    const key = Date.now().toString();
+    const json = {name, email, points};
+    const stringfied = JSON.stringify(json);
+    window.localStorage.setItem(key, stringfied);
+  }
+
+  retrieveUserInfo() {
+    const size = window.localStorage.length;
+    const players = {};
+    for(let i = 0; i < size; i++){
+      const key = window.localStorage.key(i);
+      const value = window.localStorage.getItem(key);
+      const user = JSON.parse(value);
+      players[key] = user;
+    }
+
+    return players;
   }
 
   private getCharacterFromPages(charIndex: number): Character {
@@ -86,7 +106,7 @@ export class QuizService {
   private emitTime() {
     this.time++;
 
-    if(this.time >= 20) {
+    if(this.time >= 120) {
       clearInterval(this.timerId);
       this.timingSubject.next(`00:00`);
       this.trigerGameOverEvent();
