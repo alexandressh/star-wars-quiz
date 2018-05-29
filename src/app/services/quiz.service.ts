@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { Character } from '../models/character';
 import { People } from 'src/app/models/people';
 
@@ -8,31 +8,48 @@ import { People } from 'src/app/models/people';
 })
 export class QuizService {
   timingSubject = new Subject<string>();
+  gameOverSubject = new Subject<number>();
 
   private timerId;
   private time = 0;
   private points = 0;
-  private mappedPages = {};
+  private mappedPeoplePages = {};
+  private mappedGeneralPages = {};
 
   constructor() { }
 
-  startGame() {
+  startGame(): Observable<number> {
     this.points = 0;
-    this.mappedPages = {};
+    this.mappedPeoplePages = {};
     this.timerId = setInterval(this.emitTime.bind(this), 1000);
+    return this.gameOverSubject;
+  }
+
+  mapGeneralPage(url: string, data): void {
+    this.mappedGeneralPages[url] = data;
+  }
+
+  isGeneralPageAlreadyMapped(url: string): boolean {
+    return !!this.mappedGeneralPages[url];
+  }
+
+  getGeneralPage(page: string): any {
+    if (this.isGeneralPageAlreadyMapped(page)) {
+      return this.mappedGeneralPages[page];
+    }
   }
   
-  mapPages(page: number, people: People) {
-    this.mappedPages[page] = people;
+  mapPeoplePages(page: number, people: People): void {
+    this.mappedPeoplePages[page] = people;
   }
 
-  isPageAlreadyMapped(page: number): boolean {
-    return !!this.mappedPages[page];
+  isPeoplePageAlreadyMapped(page: number): boolean {
+    return !!this.mappedPeoplePages[page];
   }
 
-  getPage(page: number): People {
-    if(this.isPageAlreadyMapped(page)) {
-      return this.mappedPages[page];
+  getPeoplePage(page: number): People {
+    if(this.isPeoplePageAlreadyMapped(page)) {
+      return this.mappedPeoplePages[page];
     }
   }
 
@@ -54,20 +71,25 @@ export class QuizService {
     return this.timingSubject.asObservable();
   }
 
+  saveUserInfo(name: string, email: string, points: number) {
+    console.log(name, email, points);
+  }
+
   private getCharacterFromPages(charIndex: number): Character {
     const pageNumber = Math.floor(charIndex / 10);
     const index = (charIndex % 10);
 
-    const page = this.mappedPages[pageNumber];
+    const page = this.mappedPeoplePages[pageNumber];
     return page.results[index];
   }
 
   private emitTime() {
     this.time++;
 
-    if(this.time >= 119) {
+    if(this.time >= 20) {
       clearInterval(this.timerId);
       this.timingSubject.next(`00:00`);
+      this.trigerGameOverEvent();
       return;
     }
 
@@ -76,5 +98,9 @@ export class QuizService {
     const secFormated = sec < 10 ? `0${sec}` : sec;
 
     this.timingSubject.next(`0${min}:${secFormated}`);
+  }
+
+  private trigerGameOverEvent() {
+    this.gameOverSubject.next(this.points);
   }
 }

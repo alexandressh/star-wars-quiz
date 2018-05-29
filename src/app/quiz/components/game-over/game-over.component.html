@@ -1,3 +1,28 @@
-<p>
-  game-over works!
-</p>
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Time's up!</h4>
+</div>
+
+<div class="modal-body">
+    <p *ngIf="!isDarkSide">The force is strong with you! You scored <b>{{points}} points</b>!</p>
+    <p *ngIf="isDarkSide">Are you on the dark side? You scored only <b>{{points}} points</b>!</p>
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" 
+               class="form-control" 
+               id="name"  
+               placeholder="Master Yoda"
+               [(ngModel)]="name">
+    </div>
+    <div class="form-group">
+        <label for="email">Email address:</label>
+        <input type="email" 
+               class="form-control" 
+               id="email" 
+               placeholder="yoda@theforce.com"
+               [(ngModel)]="email">
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="saveInfo()">Save</button>
+</div>

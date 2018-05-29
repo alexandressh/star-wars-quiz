@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, of } from 'rxjs';
+import { Observable, of, from, forkJoin } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
 
 import { People } from 'src/app/models/people';
@@ -19,15 +19,44 @@ export class SwapiService {
     private http: HttpClient,
     private quizService: QuizService
   ) { }
+  
+  getArrayOfGeneralPages(urls: string[]) {
+    return forkJoin(this.mapRequests(urls)).pipe(
+      map(names => names.join(', '))
+    );
+  }
+
+  getGeneralPageRequest(url: string) {
+    if(this.quizService.isGeneralPageAlreadyMapped(url)) {
+      return of(this.quizService.getGeneralPage(url));
+    }
+
+    return this.http.get(url).pipe(
+      map((data: any) => {
+        const { name, title } = data;
+        return name || title;
+      }),
+      tap(name => this.quizService.mapGeneralPage(url, name))
+    );
+  }
 
   getPeople(url: string = `${this.baseUrl}/people/?page=1`): Observable<People> {
     const pageNumber = this.getPageNumber(url);
 
-    if(this.quizService.isPageAlreadyMapped(pageNumber)) {
-      return of(this.quizService.getPage(pageNumber));
+    if(this.quizService.isPeoplePageAlreadyMapped(pageNumber)) {
+      return of(this.quizService.getPeoplePage(pageNumber));
     }
 
     return this.getPeopleRequest(url, pageNumber);
+  }
+
+  private mapRequests(urls: string[]): Observable<string>[] {
+    if(!urls || urls.length <= 0) {
+      return [of('N/A')];
+    }
+    return urls.map((url: string) => {
+      return this.getGeneralPageRequest(url);
+    });
   }
 
   private getPageNumber(url: string): number {
@@ -47,7 +76,7 @@ export class SwapiService {
           results: data.results.map((data, i) => this.mapCharacters(data, pageNumber, i))
         } as People;
       }),
-      tap(data => this.quizService.mapPages(pageNumber, data))
+      tap(data => this.quizService.mapPeoplePages(pageNumber, data))
     );
   }
 

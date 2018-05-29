@@ -35,7 +35,6 @@ export class CharacterCardComponent implements OnInit {
     }
   }
 
-
   nameChanged(event) {
     this.nameGuess = event;
     if(this.nameGuess === this.character.name) {
@@ -45,9 +44,11 @@ export class CharacterCardComponent implements OnInit {
   }
 
   moreInfo() {
-    const initialState = { character: this.character }
+    const initialState = { 
+      character: this.character,
+      imgLocation: this.imgLocation
+    }
     this.bsModalRef = this.modalService.show(CharacterDetailsComponent, { initialState });
-    this.bsModalRef.content.closeBtnName = 'Close';
 
     this.quizService.detailsConsulted(this.character.index);
   }

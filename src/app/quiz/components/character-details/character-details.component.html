@@ -5,35 +5,60 @@
     </button>
 </div>
 
-<div class="modal-body">
+<div class="modal-body d-flex">
+    <img [src]="imgLocation" class="character-img img-thumbnail" alt="Character picture">
     <ul>
         <li>
-            <span>Specie: </span>
-            <span>{{character.species}}</span>
+            <b>Specie: </b>
+            <span *ngIf="species$ | async as species; else loadingSpecies">
+                {{species}}
+            </span>
+            <ng-template #loadingSpecies>
+                <span>Loading...</span>
+            </ng-template>
         </li>
         <li>
-            <span>Height: </span>
+            <b>Height: </b>
             <span>{{character.height}}</span>
         </li>
         <li>
-            <span>Hair: </span>
+            <b>Hair: </b>
             <span>{{character.hair_color}}</span>
         </li>
         <li>
-            <span>Planet: </span>
-            <span>{{character.homeworld}}</span>
+            <b>Planet: </b>
+            <span>{{homeworld$ | async}}</span>
         </li>
         <li>
-            <span>Movies: </span>
-            <span>{{character.movies}}</span>
+            <b>Movies: </b>
+            <span *ngIf="films$ | async as movies; else loadingMovies">
+                {{movies}}
+            </span>
+            <ng-template #loadingMovies>
+                <span>Loading...</span>
+            </ng-template>
         </li>
         <li>
-            <span>Vehicles: </span>
-            <span>{{character.hehicles}}</span>
+            <b>Vehicles: </b>
+            <span *ngIf="vehicles$ | async as vehicles; else loadingVehicles">
+                {{vehicles}}
+            </span>
+            <ng-template #loadingVehicles>
+                <span>Loading...</span>
+            </ng-template>
+        </li>
+        <li>
+            <b>Starships: </b>
+            <span *ngIf="starships$ | async as starships; else loadingStarships">
+                {{starships}}
+            </span>
+            <ng-template #loadingStarships>
+                <span>Loading...</span>
+            </ng-template>
         </li>
     </ul>
 </div>
 
 <div class="modal-footer">
-    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">{{closeBtnName}}</button>
+    <button type="button" class="btn btn-default" (click)="bsModalRef.hide()">Close</button>
 </div>

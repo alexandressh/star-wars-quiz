@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
@@ -15,7 +16,6 @@ import { RankingComponent } from './ranking/ranking.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HeaderComponent } from './quiz/components/header/header.component';
 import { SwapiService } from './services/swapi.service';
-import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,8 @@ import { FormsModule } from '@angular/forms';
     SwapiService
   ],
   entryComponents: [
-    CharacterDetailsComponent
+    CharacterDetailsComponent,
+    GameOverComponent
   ],
   bootstrap: [AppComponent]
 })
